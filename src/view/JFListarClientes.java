@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
@@ -16,6 +17,8 @@ import model.dao.ClienteDAO;
 import model.dao.FilmeDAO;
 
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class JFListarClientes extends JFrame {
 
@@ -67,11 +70,26 @@ public class JFListarClientes extends JFrame {
 		));
 		scrollPane.setViewportView(JTCliente);
 		
-		JButton btnNewButton = new JButton("Add Cliente");
-		btnNewButton.setBounds(36, 262, 89, 23);
+		JButton btnNewButton = new JButton("Cadastrar Cliente");
+		btnNewButton.setBounds(36, 262, 144, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Alterar Cliente");
+		btnNewButton_1.addActionListener(new ActionListener() {
+				
+				public void actionPerformed(ActionEvent e) {
+					//verificar se há linha selecionada
+					if(JTCliente.getSelectedRow()!= -1) {
+						JFAtualizarCliente ac = new JFAtualizarCliente(
+								(int)JTCliente.getValueAt(JTCliente.getSelectedRow(), 0));
+						ac.setVisible(true);
+					}else {
+						JOptionPane.showMessageDialog(null, "Selecione um Cliente!");
+					}
+					readJTable();
+				
+			}
+		});
 		btnNewButton_1.setBounds(242, 262, 134, 23);
 		contentPane.add(btnNewButton_1);
 		

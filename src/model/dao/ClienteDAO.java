@@ -64,8 +64,57 @@ public class ClienteDAO {
 			ConnectionFactory.closeConnection(con, stmt, rs);
 		}
 		return clientes;
+		
+		
+	}
+	
+	public Cliente read(int id) {
+		Connection con = ConnectionFactory.getConnection();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		Cliente c = new Cliente ();
+		
+		try {
+			stmt = con.prepareStatement("SELECT * FROM cliente WHERE id=? LIMIT 1;");
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			if(rs != null && rs.next()) {
+			
+				c.setIdCliente(rs.getInt("id"));
+				c.setNome(rs.getString("nome"));
+				c.setIdade(rs.getInt("idade"));
+				c.setEmail(rs.getString("email"));
+				c.setEstadocivil(rs.getString("estadocivil"));
+			}		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.closeConnection(con, stmt, rs);
+		}
+		return c;
 	}
 	
 	
+	public void update(Cliente c) {
+		Connection con = ConnectionFactory.getConnection();
+		PreparedStatement stmt = null;
+		
+		try {
+			stmt = con.prepareStatement("UPDATE cliente SET nome=?, idade=?, email=?,"
+					+ "estadocivil=? WHERE id=?;");
+			stmt.setString(1, c.getNome());
+			stmt.setInt(2, c.getIdade());
+			stmt.setString(3, c.getEmail());
+			stmt.setString(4, c.getEstadocivil());
+			stmt.setInt(5, c.getIdCliente());
+			stmt.executeUpdate();
+			JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso!");
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Erro ao atualizar: "+ e);
+		}finally {
+			ConnectionFactory.closeConnection(con, stmt);
+		}
+	
 
+}
 }
