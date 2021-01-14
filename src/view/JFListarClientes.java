@@ -71,6 +71,12 @@ public class JFListarClientes extends JFrame {
 		scrollPane.setViewportView(JTCliente);
 		
 		JButton btnNewButton = new JButton("Cadastrar Cliente");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+			}
+		});
 		btnNewButton.setBounds(36, 262, 144, 23);
 		contentPane.add(btnNewButton);
 		
@@ -94,6 +100,24 @@ public class JFListarClientes extends JFrame {
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Excluir");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(JTCliente.getSelectedRow() != -1) {
+					
+					int opcao = JOptionPane.showConfirmDialog(null, "Deseja excluir o cliente selecionado?"
+							,"Exclusão",JOptionPane.YES_NO_OPTION);
+					if (opcao == 0) {
+						ClienteDAO dao = new ClienteDAO();
+						Cliente f = new Cliente();
+						f.setIdCliente((int) JTCliente.getValueAt(JTCliente.getSelectedRow(), 0));
+						dao.delete(f);
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Selecione um Cliente!");
+				}
+				readJTable();
+		}
+		}	);
 		btnNewButton_2.setBounds(479, 262, 89, 23);
 		contentPane.add(btnNewButton_2);
 		readJTable();
