@@ -50,7 +50,7 @@ public class JFAtualizarFilme extends JFrame {
 	 */
 	public JFAtualizarFilme(int id) {
 		setTitle("Alterar Filme");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 595, 473);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -182,16 +182,34 @@ public class JFAtualizarFilme extends JFrame {
 					f.setDublado(false);
 				}
 				dao.update(f);
+				dispose();
 			}
 		});
 		btnAlterar.setBounds(10, 400, 89, 23);
 		contentPane.add(btnAlterar);
 		
 		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtTitulo.setText(null);
+				txtSinopse.setText(null);
+				txtCategoria.setText(null);
+				spTempo.setValue(0);
+				imagem.clearSelection();
+				audio.clearSelection();				
+			}
+		});
+		
+		
 		btnLimpar.setBounds(137, 400, 89, 23);
 		contentPane.add(btnLimpar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnCancelar.setBounds(269, 400, 89, 23);
 		contentPane.add(btnCancelar);
 		

@@ -49,7 +49,7 @@ public class JFCadastrarFilme extends JFrame {
 	 * Create the frame.
 	 */
 	public JFCadastrarFilme() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 605, 430);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -151,6 +151,7 @@ public class JFCadastrarFilme extends JFrame {
 					f.setDublado(false);
 				}
 				dao.create(f);
+				dispose();
 			}
 		});
 		btncadastrar.setBounds(0, 357, 89, 23);
@@ -160,15 +161,25 @@ public class JFCadastrarFilme extends JFrame {
 		btnlimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				texttitulo.setText("");
-				
-				textcategoria.setText("");
+				texttitulo.setText(null);
+				txtSinopse.setText(null);
+				textcategoria.setText(null);
+				spinnertempo.setValue(0);
+				imagem.clearSelection();
+				audio.clearSelection();
 			}
 		});
 		btnlimpar.setBounds(119, 357, 89, 23);
 		contentPane.add(btnlimpar);
 		
 		JButton btncancelar = new JButton("Cancelar");
+		btncancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		
+		
 		btncancelar.setBounds(239, 357, 89, 23);
 		contentPane.add(btncancelar);
 		

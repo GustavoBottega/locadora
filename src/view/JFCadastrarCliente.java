@@ -48,7 +48,7 @@ public class JFCadastrarCliente extends JFrame {
 	 * Create the frame.
 	 */
 	public JFCadastrarCliente() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -110,20 +110,38 @@ public class JFCadastrarCliente extends JFrame {
 				f.setIdade(Integer.parseInt(spidade.getValue().toString()));
 				
 				dao.create(f);
-				
+				dispose();
 			}
 		});
 		btnNewButton.setBounds(24, 227, 89, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Cancelar");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnNewButton_1.setBounds(294, 227, 89, 23);
 		contentPane.add(btnNewButton_1);
 		
 	
 		
 		JButton btnNewButton_2 = new JButton("Limpar");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				textnome.setText(null);
+				textemail.setText(null);
+				textec.setText(null);
+				
+			}
+		});
 		btnNewButton_2.setBounds(164, 227, 89, 23);
 		contentPane.add(btnNewButton_2);
+		
+	
+
+		
 	}
 }

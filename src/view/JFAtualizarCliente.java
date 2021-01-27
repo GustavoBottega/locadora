@@ -48,8 +48,8 @@ public class JFAtualizarCliente extends JFrame {
 	 * Create the frame.
 	 */
 	public JFAtualizarCliente(int id) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 470, 310);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -128,22 +128,36 @@ public class JFAtualizarCliente extends JFrame {
 				f.setEstadocivil(textec.getText());
 				
 				dao.update(f);
-			
+				dispose();
 				
 			}
 		});
-		btnNewButton.setBounds(24, 227, 89, 23);
+		btnNewButton.setBounds(44, 227, 89, 23);
 		contentPane.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Cancelar");
-		btnNewButton_1.setBounds(294, 227, 89, 23);
-		contentPane.add(btnNewButton_1);
+
+		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textnome.setText(null);
+				textemail.setText(null);
+				textec.setText(null);
+					
+			}
+		});
 		
-	
 		
-		JButton btnNewButton_2 = new JButton("Limpar");
-		btnNewButton_2.setBounds(164, 227, 89, 23);
-		contentPane.add(btnNewButton_2);
+		btnLimpar.setBounds(173, 227, 89, 23);
+		contentPane.add(btnLimpar);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnCancelar.setBounds(314, 227, 89, 23);
+		contentPane.add(btnCancelar);
 		
 		
 	}
